@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="shortcut icon" href="{% static '/img/logo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/css/landing.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Patient Dashboard</title>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- Navbar -->
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+                <a class="navbar-brand" href="/">
+                    <img src="{% static '/img/logo.png' %}" alt="ClashGamers" width="35" height="35">
+                    Hospital Management
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+                    <div class="d-flex">
+                        <a href="/bloglist/"><button class="btn btn-outline-primary mx-4">Blogs</button></a>
+                    </div>
+                    <div class="d-flex">
+                        <a href="/logout/"><button class="btn btn-outline-primary mx-4">Log out</button></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            <div id="Accounts" class="container-xxl" style="margin-top: 5%;">
+                <h3>Welcome  {{name}}:</h3>
+                <div class="container-sm" style="margin-top: 20px;"> 
+                    <h4>Details of Doctors</h4>
+                    <div class="row">
+                        <div class="col">
+                            <div id="seeAllAccount">
+                                <div class="card card-body">
+                                    <table class="table table-dark table-striped">
+                                        <thead style="text-align: center;">
+                                          <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Profiel Picture</th>
+                                            <th scope="col">Specialist</th>
+                                            <th scope="col">Pin Code</th>
+                                            <th scope="col">City</th>
+                                            <th scope="col">State</th>
+                                            <th scope="col">Appointment</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody style="text-align: center;">
+                                        {% for eachAcc in doctor %}
+                                        <tr>
+                                            <th scope="row">{{eachAcc.firstName}} {{eachAcc.lastName}}</th>
+                                            <td><img src="/media/{{eachAcc.profilePic}}" width="35" height="35" style="border-radius: 50%;"></td>
+                                            <td>{{eachAcc.specialist}}</td>
+                                            <td>{{eachAcc.pincode}}</td>
+                                            <td>{{eachAcc.city}}</td>
+                                            <td>{{eachAcc.state}}</td>
+                                            <td>
+                                                <form method="post" action="/appointment/" >
+                                                    {% csrf_token %}
+                                                    <input type="text" name="username" value="{{eachAcc.username}}" hidden required/>
+                                                    <button type="submit" class="btn btn-success mx-4">Book Appointment</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                      </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="shortcut icon" href="{% static '/img/logo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/css/signup.css' %}">
+    <link rel="stylesheet" href="{% static '/css/toggle.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Create Blogs</title>
+</head>
+<body>
+    <script src="{% static '/js/profilePic.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- Navbar -->
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+                <a class="navbar-brand" href="/">
+                    <img src="{% static '/img/logo.png' %}" alt="ClashGamers" width="35" height="35">
+                    Hospital Management
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+                    <div class="d-flex">
+                        <a href="/bloglist/"><button class="btn btn-outline-primary mx-4">My Blogs</button></a>
+                    </div>
+                    <div class="d-flex">
+                        <a href="/doctorDashboard/"><button class="btn btn-outline-primary mx-4">Dashboard</button></a>
+                    </div>
+                    <div class="d-flex">
+                        <a href="/draft/"><button class="btn btn-outline-primary mx-4">Draft</button></a>
+                    </div>
+                    <div class="d-flex">
+                        <a href="/logout/"><button class="btn btn-outline-primary mx-4">Log out</button></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+        <div class="container">
+            <h1 class="text-center my-4">Create Blog Post</h1>
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-6">
+                    <form method="POST" action="/createblog/" accept-charset="UTF-8"  enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-row my-4">
+                            <div class="col form-group">
+                                <label for="title">Title : </label>
+                                <input placeholder="Title" type="text" class="form-control" id="Title" name="title" style="border-width: 1px; border-color: black;" value="{{ draft.Title }}" required>
+                            </div>
+                        </div>
+                    
+                        <div class="profile-pic mb-4 my-4">
+                            <label class="-label" for="file" style="border-radius: 10px; width: 90%;">
+                            <span class="glyphicon glyphicon-camera"></span>
+                            <span>Upload Image</span>
+                            </label>
+                            <input id="file" name="file" type="file" accept="image/*" onchange="loadFile(event)" required/>
+                            <img src="{% static '/img/landing.png' %}" id="output" width="200" style="border-radius: 10px; width: 90%;" />
+                        </div>
+                        <!-- Categories -->
+                        <div class="form-row my-4">
+                            <div class="form-group">
+                                <label for="categories">Select Category</label>
+                                <select name="categories" id="categories" class="form-select" aria-label="Default select example" style="border-width: 1px; border-color: black;" required>
+                                    <option disabled selected>-- Select State --</option>
+                                    <option> Mental Health </option>
+                                    <option> Heart Disease </option>
+                                    <option> COVID-19 </option>
+                                    <option> Immunization </option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Summary -->
+                        <div class="mb-3 my-4">
+                            <label for="Summary" class="form-label">Summary : </label>
+                            <textarea class="form-control" id="Summary" rows="3" name="summary" style="border-width: 1px; border-color: black;" value="{{ draft.Summary }}" required></textarea>
+                        </div>
+                        <!-- Content -->
+                        <div class="mb-3 my-4">
+                        <label for="Content" class="form-label">Content : </label>
+                        <textarea class="form-control" id="Content" rows="10" name="content" style="border-width: 1px; border-color: black;" value="{{ draft.Content }}" required></textarea>
+                        </div>
+                    
+                        <div class="form-group my-4 mb-4">
+                            <label>Save as Draft : </label>
+                                <input type="checkbox" name="saveasDraft">
+                                <button type="submit" style="float: right;" class="btn btn-primary btn-block"> Post  </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>         
+        </main>
+</body>
+</html>

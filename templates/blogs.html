@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="shortcut icon" href="{% static '/img/logo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/css/landing.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Blogs</title>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- Navbar -->
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+                <a class="navbar-brand" href="/">
+                    <img src="{% static '/img/logo.png' %}" alt="ClashGamers" width="35" height="35">
+                    Hospital Management
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+                    <div class="d-flex">
+                        <a href="/bloglist/"><button class="btn btn-outline-primary mx-4">Blogs</button></a>
+                    </div>
+                    {% if loginas %}
+                    <div class="d-flex">
+                        <a href="/logout/"><button class="btn btn-outline-primary mx-4">Log out</button></a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+        <main class="container">
+            <h1 class="my-4">{{ blog.Title }}</h1>
+            <img src="/media/{{ blog.Image }}" class="img-fluid"  alt="...">
+            <div class="my-5 mx-5">By -{{blog.username}}    {{blog.datetime}}</div>
+            <p class="container-md mb-5">
+                {{ blog.Content }}
+            </p>
+        </main>
+</body>
+</html>

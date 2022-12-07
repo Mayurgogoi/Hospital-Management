@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Doctor</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/css/logIn-1.css' %}">
+    <link rel="shortcut icon" href="{% static '/img/logo.png' %}" type="image/x-icon">
+</head>
+<body>
+    {% if messages %}
+	{% for message in messages %}
+		<div class="alert alert-{{ message.tags }}" role="alert">
+			{{ message }}
+		</div>
+	{% endfor %}
+	{% endif %}
+<!---------------------------------------------------------------------------------------------------------------------------------->	
+	<div class="login-bg">
+		<div class="login-box">
+			<a href="/"><button class="close-btn" id="close_BTN">+</button></a>
+			<a href="/"> <img class="login-logo" src="{% static '/img/doctor.svg' %}"> </a>
+			<form method="POST" action="/loginDoctor/" onsubmit="return validLogin(this);">
+				{% csrf_token %}
+				<input class="input-field" type="text" name="username" placeholder="username" required>
+				<input class="input-field" type="password" name="password" placeholder="password" required>
+				<button class="login-button" type="submit">Log In</button>
+			</form>
+
+			<div class="links">
+				<div>
+					Don't have an account? <a class="link-a" href="/signupDoctor">Create Account</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Import Javascript Files -->
+	<script src="{% static '/js/validLogin.js' %}"></script>
+</body>
+</html>
